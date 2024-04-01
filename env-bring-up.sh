@@ -17,7 +17,7 @@ VMADMINPASS='loPZ7apx0k4ASXucg_'
 snapshot_name="Azure-TPCH-TPCE-backup"
 resource_group_snapshot="pathfinder-azure-rg"
 new_disk_name="BackupDisk"
-new_disk_sku="StandardSSD_LRS"
+new_disk_sku="PremiumV2_LRS"
 #disk_size_gb=100
 
 # Function to create a managed disk from a snapshot and attach it to the VM
@@ -33,6 +33,8 @@ create_disk_from_snapshot() {
     --sku $new_disk_sku \
     --source $snapshot_id \
     --zone $ZONE \
+    --disk-iops-read-only 2000 \
+    --disk-mbps-read-only 1200 \
     --output table
   #  --size-gb $disk_size_gb \
 }
