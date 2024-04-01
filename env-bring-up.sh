@@ -92,7 +92,7 @@ delete_disks() {
   echo "Deleting BackupDisk..."
   az disk delete --resource-group $RGNAME --name $new_disk_name --yes
   echo "Deleting VM OS disk..."
-  az disk delete --resource-group $RGNAME --ids $vm_os_disk_id --yes
+  az disk delete --ids $vm_os_disk_id --yes
 }
 
 # Main script
