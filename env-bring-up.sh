@@ -83,6 +83,7 @@ delete_nics() {
 # Function to delete VM
 delete_vm() {
   echo "Deleting VM..."
+  vm_os_disk_id=$(az vm show --name $VMNAME --resource-group $RGNAME --query 'storageProfile.osDisk.managedDisk.id' -o tsv)
   az vm delete --resource-group $RGNAME --name $VMNAME --yes
 }
 
@@ -91,7 +92,6 @@ delete_disks() {
   echo "Deleting BackupDisk..."
   az disk delete --resource-group $RGNAME --name $new_disk_name --yes
   echo "Deleting VM OS disk..."
-  vm_os_disk_id=$(az vm show --name $VMNAME --resource-group $RGNAME --query 'storageProfile.osDisk.managedDisk.id' -o tsv)
   az disk delete --resource-group $RGNAME --name $vm_os_disk_id --yes
 }
 
