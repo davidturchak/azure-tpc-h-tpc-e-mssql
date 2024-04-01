@@ -22,6 +22,13 @@ create_nics() {
     --subnet ${DATA_SUBNET} \
     --accelerated-networking true \
     --output table
+  az network nic create \
+    --name ${VMNAME}-mgmt \
+    --resource-group $RGNAME \
+    --vnet-name $VNET \
+    --subnet ${MGMT_SUBNET} \
+    --accelerated-networking true \
+    --output table
 }
 
 # Function to create VM
