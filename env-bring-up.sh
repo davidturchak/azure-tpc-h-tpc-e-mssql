@@ -31,7 +31,9 @@ create_disk_from_snapshot() {
     --resource-group $RGNAME\
     --name $new_disk_name \
     --sku $new_disk_sku \
-    --source $snapshot_id
+    --source $snapshot_id \
+    --zone $ZONE
+    --output table
   #  --size-gb $disk_size_gb \
 }
 
@@ -84,6 +86,12 @@ delete_vm() {
   az vm delete --resource-group $RGNAME --name $VMNAME --yes
 }
 
+# Function to delete VM
+delete_disk() {
+  echo "Deleting BackupDisk..."
+  az disk delete --resource-group $RGNAME --name $new_disk_name --yes
+}
+
 # Main script
 if [[ "$1" == "--create" ]]; then
 
@@ -94,6 +102,7 @@ if [[ "$1" == "--create" ]]; then
 elif [[ "$1" == "--delete" ]]; then
   delete_vm || { echo "Error deleting VM. Exiting."; exit 1; }
   delete_nics || { echo "Error deleting NICs. Exiting."; exit 1; }
+  delete_disk || { echo "Error deleting BackupDisk. Exiting."; exit 1; }
   echo "Resources deleted successfully."
 else
   echo "Usage: $0 [--create|--delete]"
