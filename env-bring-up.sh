@@ -22,14 +22,6 @@ create_nics() {
     --subnet ${DATA_SUBNET} \
     --accelerated-networking true \
     --output table
-
-  az network nic create \
-    --name ${VMNAME}-mgmt \
-    --resource-group $RGNAME \
-    --vnet-name $VNET \
-    --subnet ${MGMT_SUBNET} \
-    --accelerated-networking false \
-    --output table
 }
 
 # Function to create VM
@@ -60,15 +52,16 @@ delete_vm() {
 
 # Main script
 if [[ "$1" == "--create" ]]; then
-  create_nics
-  create_vm
+  create_nics || { echo "Error creating NICs. Exiting."; exit 1; }
+  create_vm || { echo "Error creating VM. Exiting."; exit 1; }
   echo "Resources created successfully."
 elif [[ "$1" == "--delete" ]]; then
-  delete_nics
-  delete_vm
+  delete_nics || { echo "Error deleting NICs. Exiting."; exit 1; }
+  delete_vm || { echo "Error deleting VM. Exiting."; exit 1; }
   echo "Resources deleted successfully."
 else
   echo "Usage: $0 [--create|--delete]"
   echo "  --create: Create resources"
   echo "  --delete: Delete resources"
+  exit 1
 fi
