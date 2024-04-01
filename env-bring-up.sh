@@ -83,13 +83,16 @@ delete_nics() {
 # Function to delete VM
 delete_vm() {
   echo "Deleting VM..."
-  az vm delete --resource-group $RGNAME --name $VMNAME --yes
+  az vm delete --resource-group $RGNAME --name $VMNAME --os-disk-delete-option --nic-delete-option --yes
 }
 
-# Function to delete VM
-delete_disk() {
+# Function to delete Disks
+delete_disks() {
   echo "Deleting BackupDisk..."
   az disk delete --resource-group $RGNAME --name $new_disk_name --yes
+  echo "Deleting VM OS disk..."
+  vm_os_disk_id=$(az vm show --name $VMNAME --resource-group $RGNAME --query 'storageProfile.osDisk.managedDisk.id' -o tsv)
+  az disk delete --resource-group $RGNAME --name $vm_os_disk_id --yes
 }
 
 # Main script
@@ -102,7 +105,7 @@ if [[ "$1" == "--create" ]]; then
 elif [[ "$1" == "--delete" ]]; then
   delete_vm || { echo "Error deleting VM. Exiting."; exit 1; }
   delete_nics || { echo "Error deleting NICs. Exiting."; exit 1; }
-  delete_disk || { echo "Error deleting BackupDisk. Exiting."; exit 1; }
+  delete_disks || { echo "Error deleting BackupDisk. Exiting."; exit 1; }
   echo "Resources deleted successfully."
 else
   echo "Usage: $0 [--create|--delete]"
