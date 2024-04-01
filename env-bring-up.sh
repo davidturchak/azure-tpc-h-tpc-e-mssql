@@ -32,7 +32,7 @@ create_disk_from_snapshot() {
     --name $new_disk_name \
     --sku $new_disk_sku \
     --source $snapshot_id \
-    --zone $ZONE
+    --zone $ZONE \
     --output table
   #  --size-gb $disk_size_gb \
 }
