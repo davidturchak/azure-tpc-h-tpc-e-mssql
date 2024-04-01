@@ -3,7 +3,8 @@
 # Set variables for VM configuration
 RGNAME='deployment-tpch-tpce'
 VMNAME='sql-host'
-VNET='tpch-tpce-network'
+DEPLOYMENT_SUFFIX="${RGNAME#deployment-}"
+VNET="$DEPLOYMENT_SUFFIX-network"
 DATA_SUBNET='flex-cluster-d954-network-external-data1'
 MGMT_SUBNET='flex-cluster-d954-network-external-mgmt'
 LOCATION='westus2' # The snapshot location
@@ -48,8 +49,8 @@ create_vm() {
 
 # Function to delete NICs
 delete_nics() {
-  az network nic delete --name ${VMNAME}-data --resource-group $RGNAME --yes
-  az network nic delete --name ${VMNAME}-mgmt --resource-group $RGNAME --yes
+  az network nic delete --name ${VMNAME}-data --resource-group $RGNAME
+  az network nic delete --name ${VMNAME}-mgmt --resource-group $RGNAME
 }
 
 # Function to delete VM
