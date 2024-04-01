@@ -34,7 +34,7 @@ create_disk_from_snapshot() {
     --source $snapshot_id \
     --zone $ZONE \
     --disk-iops-read-only 3000 \
-    --disk-mbps-read-only 1200 \
+    --disk-mbps-read-only 750 \
     --output table
   #  --size-gb $disk_size_gb \
 }
