@@ -83,7 +83,7 @@ delete_nics() {
 # Function to delete VM
 delete_vm() {
   echo "Deleting VM..."
-  az vm delete --resource-group $RGNAME --name $VMNAME --os-disk-delete-option --nic-delete-option --yes
+  az vm delete --resource-group $RGNAME --name $VMNAME --yes
 }
 
 # Function to delete Disks
