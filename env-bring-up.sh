@@ -16,6 +16,7 @@ VMADMINPASS='loPZ7apx0k4ASXucg_'
 
 # Function to create NICs
 create_nics() {
+  echo "Creating NICs..."
   az network nic create \
     --name ${VMNAME}-data \
     --resource-group $RGNAME \
@@ -34,6 +35,7 @@ create_nics() {
 
 # Function to create VM
 create_vm() {
+  echo "Creating VM..."
   az vm create \
     --resource-group $RGNAME \
     --name $VMNAME \
@@ -49,12 +51,14 @@ create_vm() {
 
 # Function to delete NICs
 delete_nics() {
+  echo "Deleting NICs..."
   az network nic delete --name ${VMNAME}-data --resource-group $RGNAME
   az network nic delete --name ${VMNAME}-mgmt --resource-group $RGNAME
 }
 
 # Function to delete VM
 delete_vm() {
+  echo "Deleting VM..."
   az vm delete --resource-group $RGNAME --name $VMNAME --yes
 }
 
