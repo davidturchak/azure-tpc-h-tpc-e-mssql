@@ -56,8 +56,8 @@ if [[ "$1" == "--create" ]]; then
   create_vm || { echo "Error creating VM. Exiting."; exit 1; }
   echo "Resources created successfully."
 elif [[ "$1" == "--delete" ]]; then
-  delete_nics || { echo "Error deleting NICs. Exiting."; exit 1; }
   delete_vm || { echo "Error deleting VM. Exiting."; exit 1; }
+  delete_nics || { echo "Error deleting NICs. Exiting."; exit 1; }
   echo "Resources deleted successfully."
 else
   echo "Usage: $0 [--create|--delete]"
