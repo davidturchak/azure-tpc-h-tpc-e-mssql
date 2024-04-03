@@ -16,7 +16,7 @@ VMADMINPASS='loPZ7apx0k4ASXucg_'
 #Backup Disk params
 snapshot_name="azure_tpc_e_tcpc_h_tools"
 resource_group_snapshot="pathfinder-azure-rg"
-new_disk_name="BackupDisk1"
+new_disk_name="BackupDisk"
 new_disk_sku="PremiumV2_LRS"
 #disk_size_gb=100
 
@@ -35,6 +35,8 @@ create_disk_from_snapshot() {
     --zone $ZONE \
     --disk-iops-read-write 10000 \
     --disk-mbps-read-write 1200 \
+    --max-shares 1 \
+    --performance-plus \
     --output table
   #  --size-gb $disk_size_gb \
 }
