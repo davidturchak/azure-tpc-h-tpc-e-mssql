@@ -32,13 +32,13 @@ create_disk_from_snapshot() {
     --name $new_disk_name \
     --sku $new_disk_sku \
     --source $snapshot_id \
+    --performance-plus \
+    --output table
     #--zone $ZONE \
     #--disk-iops-read-write 10000 \
     #--disk-mbps-read-write 1200 \
     #--max-shares 1 \
-    --performance-plus \
-    --output table
-  #  --size-gb $disk_size_gb \
+    #  --size-gb $disk_size_gb \
 }
 
 # Function to create NICs
