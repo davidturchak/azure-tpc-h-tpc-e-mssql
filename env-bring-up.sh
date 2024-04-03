@@ -9,14 +9,14 @@ MGMT_SUBNET="$DEPLOYMENT_SUFFIX-host-mgmt-subnet"
 DATA_SUBNET="$DEPLOYMENT_SUFFIX-host-data-subnet"
 LOCATION='westus2' # The snapshot location
 ZONE='1'
-VMSIZE='Standard_L48s_v3'
+VMSIZE='Standard_L80s_v3'
 IMAGE2USE='microsoftsqlserver:sql2022-ws2022:sqldev-gen2:latest'
 VMADMINUSER='flexadm'
 VMADMINPASS='loPZ7apx0k4ASXucg_'
 #Backup Disk params
-snapshot_name="Azure-TPCH-TPCE-backup"
+snapshot_name="azure_tpc_e_tcpc_h_tools"
 resource_group_snapshot="pathfinder-azure-rg"
-new_disk_name="BackupDisk"
+new_disk_name="BackupDisk1"
 new_disk_sku="PremiumV2_LRS"
 #disk_size_gb=100
 
