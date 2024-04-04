@@ -37,7 +37,7 @@ create_disk_from_snapshot() {
     --zone $ZONE \
     #--disk-iops-read-write 5000 \
     #--disk-mbps-read-write 1000 \
-    --max-shares 2 \
+    # --max-shares 2 \
     --size-gb $disk_size_gb
 }
 
