@@ -17,8 +17,9 @@ VMADMINPASS='loPZ7apx0k4ASXucg_'
 snapshot_name="azure_tpc_e_tcpc_h_tools"
 resource_group_snapshot="pathfinder-azure-rg"
 new_disk_name="BackupDisk"
-new_disk_sku="PremiumV2_LRS"
-#disk_size_gb=100
+# new_disk_sku="PremiumV2_LRS" Not supported
+new_disk_sku="Premium_LRS"
+disk_size_gb=32767
 
 # Function to create a managed disk from a snapshot and attach it to the VM
 create_disk_from_snapshot() {
@@ -34,10 +35,10 @@ create_disk_from_snapshot() {
     --source $snapshot_id \
     --output table \
     --zone $ZONE \
-    --disk-iops-read-write 5000 \
-    --disk-mbps-read-write 1000 \
-    --max-shares 1
-    #  --size-gb $disk_size_gb \
+    #--disk-iops-read-write 5000 \
+    #--disk-mbps-read-write 1000 \
+    --max-shares 2 \
+    --size-gb $disk_size_gb
 }
 
 # Function to create NICs
